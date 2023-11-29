@@ -1,0 +1,69 @@
+Write a Java Program to implement Command  Design Pattern  for Command Interface  with execute() . Use this to create variety of commands for LightOnCommand,  
+LightOffCommand, GarageDoorUpCommand, StereoOnWithCDComman
+
+// Target interface (what the client expects)
+interface BeatModel {
+    void start();
+    void stop();
+    void increaseBPM();
+    void decreaseBPM();
+}
+
+// Adaptee (existing class to be adapted)
+class HeartModel {
+    void startHeart() {
+        System.out.println("Heart is beating...");
+    }
+
+    void stopHeart() {
+        System.out.println("Heart has stopped.");
+    }
+}
+
+// Adapter class to adapt HeartModel to BeatModel
+class HeartAdapter implements BeatModel {
+    private HeartModel heartModel;
+
+    public HeartAdapter(HeartModel heartModel) {
+        this.heartModel = heartModel;
+    }
+
+    @Override
+    public void start() {
+        heartModel.startHeart();
+    }
+
+    @Override
+    public void stop() {
+        heartModel.stopHeart();
+    }
+
+    @Override
+    public void increaseBPM() {
+        // Logic to increase heart rate (not implemented in this example)
+        System.out.println("Heart rate increased.");
+    }
+
+    @Override
+    public void decreaseBPM() {
+        // Logic to decrease heart rate (not implemented in this example)
+        System.out.println("Heart rate decreased.");
+    }
+}
+
+// Client code
+public class AdapterPatternExample {
+    public static void main(String[] args) {
+        // Create a HeartModel
+        HeartModel heart = new HeartModel();
+
+        // Create an adapter for the HeartModel
+        BeatModel beatModel = new HeartAdapter(heart);
+
+        // Use the BeatModel interface
+        beatModel.start();
+        beatModel.increaseBPM();
+        beatModel.decreaseBPM();
+        beatModel.stop();
+    }
+}
